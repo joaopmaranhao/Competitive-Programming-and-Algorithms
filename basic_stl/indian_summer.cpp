@@ -9,20 +9,22 @@ using namespace std;
 using ll = long long;
 using llu = unsigned long long;
 
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+
 int main(){
+
         int n;
-        ll temp;
-        vector<ll> seq;
-        vector<ll> freq;
+        string temp;
+        map<string, int> leaves;
 
         cin >> n;
+        cin.ignore();
 
         for(int i = 0; i < n; i++){
-                cin >> temp;
-                seq.pb(temp);
+                getline(cin, temp);
+                leaves[temp] = 1;
         }
 
-        for(int i = 0; i < n; i++){
-                freq[]
-        }
+        cout << leaves.size();
 }
