@@ -12,30 +12,29 @@ using llu = unsigned long long;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
-int main(){
+int main(){ _
 
         int n, m;
         queue<pair<int, int>> a;
         cin >> n >> m;
         
-        pair<int, int> tmpp;
-        for(int i = 0; i < n; i++){
-                cin >> tmpp.first;
-                tmpp.second = tmpp.first;
-                a.push(tmpp);
+        for(int i = 1; i <= n; i++){
+                int candies_needed;
+                cin >> candies_needed;
+                a.push({i, candies_needed});
         }
+
         pair<int, int> l;
         while(!a.empty()){
-                l = a.front();
+                l = a.front(); 
+                a.pop();
 
-                if(l.second < m){
-                        a.pop();
-                        l.second -= m;
-                        a.push(l); //takes candies and goes to the end of the queue
-                }else if(l.second >= m){
-                        a.pop(); //takes candies and go home
+                if(l.second > m){
+                        l.second -= m; // still needs more
+                        a.push(l);     // goes to the end
                 }
         }
 
-        cout << l.first << endl;
+        cout << l.first << endl; 
+        return 0;
 }
