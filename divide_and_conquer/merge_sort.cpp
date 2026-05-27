@@ -38,20 +38,24 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 
-vector<ll> merge(vector<ll>& A, int l, int r, int m) {
+void merge(vector<ll>& A, int l, int r, int m) {
 
-        vector<ll> L(A.begin(), A.begin() + m);
-        vector<ll> R(A.begin() + m + 1, A.end());
+        vector<ll> L(A.begin() + l, A.begin() + m + 1);
+        vector<ll> R(A.begin() + m + 1, A.begin() + r + 1);
 
         L.pb(LINF);
         R.pb(LINF);
 
-        //Gotta implement later
+        int i = 0, j = 0, k = l;
+        while (i < L.size() - 1 || j < R.size() - 1) {
+                if (L[i] <= R[j]) A[k++] = L[i++];
+                else A[k++] = R[j++];
+        }
 }
 
 vector<ll> MergeSort(vector<ll>& A, int l, int r) {
 
-        if(A.size() == 1){
+        if(l >= r){
                 return A;
         }
 
@@ -61,4 +65,38 @@ vector<ll> MergeSort(vector<ll>& A, int l, int r) {
         merge(A, l, r, m);
 
         return A;
+}
+
+vector<ll> MergeSort(vector<ll>& A){
+        return MergeSort(A, 0, A.size() - 1);
+}
+
+int main(){
+
+        int n;
+        cin >> n;
+        
+        vector<ll> arr(n);
+
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distr(1, 100); 
+
+        for(int i = 0; i < n; i++){
+                arr[i] = distr(gen);
+        }
+
+        cout << "Array: " << endl << "[ ";
+        for(int i = 0; i < n; i++){
+                if(i == n - 1) cout << arr[i] << " ]" << endl;
+                else cout << arr[i] << ", ";
+        }
+
+        MergeSort(arr);
+
+        cout << "Array Ordenado: " << endl << "[ ";
+        for(int i = 0; i < n; i++){
+                if(i == n - 1) cout << arr[i] << " ]" << endl;
+                else cout << arr[i] << ", ";
+        }
 }
