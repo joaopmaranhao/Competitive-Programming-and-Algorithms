@@ -23,16 +23,9 @@ int main(){ _
         }
 
         while(q--){
-
                 int x;
                 cin >> x;
-
-                int l = 0;
-                int r = vec.size();
-
-                //binsearch
-                bool found = false;
-
+                int l = 0, r = vec.size(), ans = -1;
                 while(l < r){
                         int m = l + (r - l) / 2;
                         if(vec[m] < x){
@@ -40,12 +33,11 @@ int main(){ _
                         } else if(vec[m] > x){
                                 r = m;
                         } else {
-                                cout << m << endl;
-                                found = true;
-                                break;
+                                ans = m;
+                                r = m;
                         }
                 }
-                if(!found) cout << "-1" << endl;
+                cout << ans << endl;
         }
 
         return 0;
