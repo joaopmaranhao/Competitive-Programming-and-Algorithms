@@ -12,73 +12,70 @@ typedef unsigned long long llu;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
-int partition(vector<ll>& vec, int l, int r){
+int partition(vector<ll> &vec, int l, int r){          
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> dist(l, r);
 
-        random_device rd;
-        mt19937 gen(rd());
-        uniform_int_distribution<int> dist(l, r);
+    ll pivo = vec[dist(gen)];
 
-        int pivo = vec[dist(gen)];
+    int i = l - 1;
+    int j = r + 1;
 
-        int i = l - 1;
-        int j = r + 1;
+    while(1){
+        do{
+            i++;
+        }while(vec[i] < pivo);
 
-        while(1){
-                do{
-                        i++;
-                }while(vec[i] < pivo);
+        do{
+            j--;
+        }while(vec[j] > pivo); 
 
-                do{
-                        j--;
-                }while(vec[i] < pivo);
-
-                if(i >= j){
-                        return j;
-                }
-
-                int temp = vec[i];
-                vec[i] = vec[j];
-                vec[j] = temp;
+        if(i >= j){
+            return j;
         }
+
+        ll temp = vec[i];
+        vec[i] = vec[j];
+        vec[j] = temp;
+    }
 }
 
-int quick_sort(vector<ll> vec, int l, int r){
-        if(l < r){
-                
-                int q = partition(vec, l, r);
-                quick_sort(vec, l, q);
-                quick_sort(vec, q + 1, r);
-        }
+void quick_sort(vector<ll> &vec, int l, int r){
+    if(l < r){                                 
+        int q = partition(vec, l, r);
+        quick_sort(vec, l, q);
+        quick_sort(vec, q + 1, r);
+    }
 }
 
-int main(){ _
+int main(){ _          
+    int n;
+    if (!(cin >> n)) return 0;
+             
+    vector<ll> arr(n);
 
-        int n;
-        cin >> n;
-        
-        vector<ll> arr(n);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distr(1, 100);  
 
-        random_device rd;
-        mt19937 gen(rd());
-        uniform_int_distribution<> distr(1, 100); 
+    for(int i = 0; i < n; i++){
+        arr[i] = distr(gen);
+    }
 
-        for(int i = 0; i < n; i++){
-                arr[i] = distr(gen);
-        }
+    cout << "Array: " << endl << "[ ";
+    for(int i = 0; i < n; i++){
+        if(i == n - 1) cout << arr[i] << " ]" << endl;
+        else cout << arr[i] << ", ";
+    }
 
-        cout << "Array: " << endl << "[ ";
-        for(int i = 0; i < n; i++){
-                if(i == n - 1) cout << arr[i] << " ]" << endl;
-                else cout << arr[i] << ", ";
-        }
+    quick_sort(arr, 0, arr.size() - 1);
 
-        quick_sort(arr, 0, arr.size() - 1);
-
-        cout << "Array Ordenado: " << endl << "[ ";
-        for(int i = 0; i < n; i++){
-                if(i == n - 1) cout << arr[i] << " ]" << endl;
-                else cout << arr[i] << ", ";
-        }
-    
-        return 0;
+    cout << "Array Ordenado: " << endl << "[ ";
+    for(int i = 0; i < n; i++){
+        if(i == n - 1) cout << arr[i] << " ]" << endl;
+        else cout << arr[i] << ", ";
+    }
+         
+    return 0;
 }
