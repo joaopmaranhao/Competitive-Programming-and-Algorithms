@@ -12,7 +12,7 @@ By iteractive analisys, the recurrency of mergesort follows the recursive formul
 ```
 T(n) = T(\floor{n/2}) + T(\ceil{n/2}) + cn
 ```
-For powwers of two, wich makes the analisys simpler, the formula is
+For powers of two, wich makes the analisys simpler, the formula is
 ```
 T(n) = 2T(n/2) + n
 ```
