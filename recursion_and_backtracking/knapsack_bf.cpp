@@ -11,50 +11,68 @@ typedef unsigned long long llu;
 
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
-vector<pair<ll, ll>> itens;
-ll cap;
-ll highest = 0;
-vector<bool> sln;
-vector<bool> curr;
 
-void backtrack(int idx, ll currw, ll currv) {
-    
-    if (currw > cap) {
+struct Item {
+    int idx;
+    float value;
+    float weight;
+
+    Item() = default;
+    Item(int id, float v, float w) : idx(id), value(v), weight(w) {}
+};
+
+int n;
+float max_weight;
+vector<Item> items;
+
+float best_value = -1.0f;
+vector<bool> best_sol;
+
+vector<bool> current_sol;
+
+void backtrack(int i, float current_weight, float current_value) {
+    if (current_weight > max_weight) {
         return;
     }
-    
-    if (idx == itens.size()) {
-        if (currv > highest) {
-            highest = currv;
-            sln = curr;
+
+    // Caso base: avaliamos todos os itens
+    if (i == n) {
+        if (current_value > best_value) {
+            best_value = current_value;
+            best_sol = current_sol;
         }
         return;
     }
-    
-    curr.push_back(false); 
-    backtrack(idx + 1, currw, currv);
-    curr.pop_back();      
 
-    curr.push_back(true); 
-    backtrack(idx + 1, currw + itens[idx].first, currv + itens[idx].second);
-    curr.pop_back();       
+    current_sol[i] = true;
+    backtrack(i + 1, current_weight + items[i].weight, current_value + items[i].value);
+
+    current_sol[i] = false;
+    backtrack(i + 1, current_weight, current_value);
 }
 
 int main() { _
-    int n;
-    cin >> n >> cap;
-    itens.resize(n);
+    if (!(cin >> n >> max_weight)) return 0;
+
+    items.resize(n);
+    current_sol.assign(n, false);
+    best_sol.assign(n, false);
+
     for (int i = 0; i < n; i++) {
-        cin >> itens[i].first >> itens[i].second;
+        float v, w;
+        cin >> v >> w;
+        items[i] = Item(i, v, w);
     }
 
-    backtrack(0, 0, 0);
+    backtrack(0, 0.0f, 0.0f);
 
-    cout << "Maior valor: " << highest << endl;
-    
-    cout << "Vetor solucao: ";
-    for (int i = 0; i < sln.size(); i++) {
-        cout << sln[i] << " ";
+    // Exibe o resultado
+    cout << "Valor Maximo: " << best_value << endl;
+    cout << "Itens escolhidos (indices originais): ";
+    for (int i = 0; i < n; i++) {
+        if (best_sol[i]) {
+            cout << i << " ";
+        }
     }
     cout << endl;
 
