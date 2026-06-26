@@ -35,7 +35,6 @@ void backtrack(int i, float current_weight, float current_value) {
         return;
     }
 
-    // Caso base: avaliamos todos os itens
     if (i == n) {
         if (current_value > best_value) {
             best_value = current_value;
