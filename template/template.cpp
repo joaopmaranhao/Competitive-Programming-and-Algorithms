@@ -1,5 +1,3 @@
-//Credits to @GabrielCFormiga for the template
-
 #include <bits/stdc++.h> //including everything from the stl
 #define _ ios_base::sync_with_stdio(0);cin.tie(0); //fast io
 #define endl '\n' //exchanging the std::endl for '\n'
@@ -9,12 +7,16 @@
 using namespace std;
 
 typedef long long ll;
-typedef unsigned long long llu;
+typedef unsigned long long ull;
 
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
-    
+    int t;
+    cin >> t;
+    while(t--){
+        //code here
+    }
     return 0;
 }
