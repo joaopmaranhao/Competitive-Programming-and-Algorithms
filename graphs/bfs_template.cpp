@@ -14,46 +14,45 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 void bfs(const vector<vector<int>>& G, int start = 0){
 
-vector<bool> visited(G.size(), false);
-queue<int> q;
-//queue
-q.push(start);
-visited[start] = true;
+    vector<bool> visited(G.size(), false);
+    queue<int> q;
+    //stack
+    q.push(start);
 
-while(!q.empty()){
+    while(!q.empty()){
 
         int curr = q.front();
+        q.pop();
+        
+        if(visited[curr]) continue;
+        visited[curr] = true;
 
         cout << curr << " "; //process the node here
 
-        q.pop();
-
         //exploring the neibghours
         for(int neib : G[curr]){
-                if(visited[neib]) continue;
-                visited[neib] = true;
-                q.push(neib);
+            if(visited[neib]) continue;
+            q.push(neib);
         }
-}
-cout << endl;
+    }
+    cout << endl;
 }
 
 int main(){ _
 
-        int v, e; 
-        cin >> v >> e;
+    int v, e; 
+    cin >> v >> e;
 
-        // Fixed: Initializing an empty adjacency list for v vertices
-        vector<vector<int>> graph(v); 
+    vector<vector<int>> graph(v); 
 
-        for(int i = 0; i < e; i++){
-                int a, b, w;
-                cin >> a >> b >> w; // w can be saved in a pair if weights are needed later
+    for(int i = 0; i < e; i++){
+        int a, b;
+        cin >> a >> b; // w can be saved in a pair if weights are needed later
 
-                graph[a].pb(b); 
-        }
+        graph[a].pb(b); 
+    }
 
-        bfs(graph);
+    bfs(graph);
 
-        return 0;
+    return 0;
 }       
