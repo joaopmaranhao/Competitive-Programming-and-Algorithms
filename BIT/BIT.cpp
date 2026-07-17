@@ -1,6 +1,6 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
-#define _ ios_base::sync_with_stdio(00);cin.tie(0);
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
 using namespace std;
 
 using ll = long long;
@@ -20,13 +20,15 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 const int MOD = 1e9 + 7;
 
-int main(){ _
+//later
+
+int main() { _
 
     int t;
     cin >> t;
 
-    while(t--){
-        //solution
+    while (t--) {
+        
     }
 
     return 0;
