@@ -16,6 +16,7 @@ using ull = unsigned long long;
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 const int MOD = 1e9 + 7;
+
 struct BIT{
     int n;
     vector<ll> bit;
@@ -55,12 +56,37 @@ struct BIT{
 
 int main() { _
 
-    int t;
-    cin >> t;
+    int n, q;
+    cin >> n >> q;
 
-    while (t--) {
-        
+    vector<ll> v(n);
+    for(int i = 0; i < n; i++) {
+        cin >> v[i];      
     }
 
+    vector<ll> diff(n);
+    diff[0] = v[0];
+    for(int i = 1; i < n; i++) {
+        diff[i] = v[i] - v[i - 1];
+    }
+    BIT bit(diff);
+
+    while(q--){
+        int qt;
+        cin >> qt;
+
+        if(qt == 1){
+            int a, b;
+            ll u;
+            cin >> a >> b >> u;
+
+            bit.update(a - 1, u);
+            bit.update(b, -u);
+
+        }else if(qt == 2){
+            int k; cin >> k;
+            cout << bit.query(k - 1) << endl;
+        }
+    }
     return 0;
 }

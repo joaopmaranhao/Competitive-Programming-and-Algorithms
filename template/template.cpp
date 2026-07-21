@@ -4,10 +4,7 @@
 using namespace std;
 
 using ll = long long;
-using vi = vector<int>;
-using vll = vector<ll>;
-using pii = pair<int, int>;
-using pll = pair<ll, ll>;
+using ull = unsigned long long;
 
 #define pb push_back
 #define F first
