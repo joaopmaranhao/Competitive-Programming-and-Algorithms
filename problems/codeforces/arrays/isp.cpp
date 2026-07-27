@@ -5,7 +5,6 @@ using namespace std;
 
 using ll = long long;
 using ull = unsigned long long;
-using ld = long double;
 
 #define pb push_back
 #define F first
@@ -20,17 +19,28 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    ll a, b, c, d;
-    cin >> a >> b >> c >> d;
+   
+    int n;
+    cin >> n;
 
-    ld lhs = b * log2l(a);
-    ld rhs = d * log2l(c);
-
-    if(lhs > rhs){
-        cout << "YES" << endl;
-    }else{
-        cout << "NO" << endl;
+    vector<int> v(n), u(n);
+    for(int i = 0; i < n; i++) {
+        cin >> v[i];      
     }
+    for(int i = 0; i < n; i++) {
+        cin >> u[i];      
+    }
+
+    map<int, int> freqv;
+    map<int, int> freqb;
+
+    for(int i = 0; i < n; i++) {
+        freqv[v[i]]++;
+        freqb[u[i]]++;      
+    }
+
+    (freqv == freqb) ? cout << "yes" : cout << "no";
+    cout << endl;
 
     return 0;
 }

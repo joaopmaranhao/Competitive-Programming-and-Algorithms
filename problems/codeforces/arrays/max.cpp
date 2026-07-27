@@ -5,7 +5,6 @@ using namespace std;
 
 using ll = long long;
 using ull = unsigned long long;
-using ld = long double;
 
 #define pb push_back
 #define F first
@@ -20,17 +19,15 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    ll a, b, c, d;
-    cin >> a >> b >> c >> d;
+    int n; cin >> n;
 
-    ld lhs = b * log2l(a);
-    ld rhs = d * log2l(c);
-
-    if(lhs > rhs){
-        cout << "YES" << endl;
-    }else{
-        cout << "NO" << endl;
+    int mx = -INF;
+    for(int i = 0; i < n; i++) {
+        int tmp;
+        cin >> tmp;
+        mx = max(tmp, mx);
     }
+    cout << mx << endl;
 
     return 0;
 }
