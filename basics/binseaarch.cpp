@@ -15,9 +15,9 @@ size_t binary_search(vector<T>& vec, T target){
         size_t m = l + (r-l) / 2;
         if(vec[m] == target) return m;
         if(vec[m] < target){
-            l = m;
+            l = m + 1;
         }else if(vec[m] > target){
-            r = m;
+            r = m - 1;
         }
     }
     return -1;

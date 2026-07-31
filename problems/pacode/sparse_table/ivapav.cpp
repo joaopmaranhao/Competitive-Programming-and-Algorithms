@@ -23,7 +23,7 @@ struct SparseTable {
     int n, k;
 
     T op(T a, T b) { 
-        return std::min(a, b); 
+        return a & b;
     }
 
     SparseTable(const vector<T> &vec) {
@@ -31,9 +31,11 @@ struct SparseTable {
         k = __lg(n) + 1;
         st.assign(k + 1, vector<T>(n));
         for (int j = 0; j < n; j++) st[0][j] = vec[j];
-        for (int i = 1; i <= k; i++) 
-            for (int j = 0; j + (1 << i) <= n; j++) 
+        for (int i = 1; i <= k; i++){ 
+            for (int j = 0; j + (1 << i) <= n; j++){ 
                 st[i][j] = op(st[i - 1][j], st[i - 1][j + (1 << (i - 1))]);
+            }
+        }
     }
 
     T query(int l, int r) {
@@ -44,21 +46,44 @@ struct SparseTable {
 
 int main() { _
 
-    int n, q;
-    cin >> n >> q;
+    int t;
+    cin >> t;
 
-    vector<ll> v(n);
-    for(int i = 0; i < n; i++) {
-        cin >> v[i];
-    }
+    while (t--) {
+        int n;
+        cin >> n;
+        
+        vector<int> v(n);
+        for (int i = 0; i < n; i++) {
+            cin >> v[i];     
+        }
+        
+        SparseTable<int> st(v);
 
-    SparseTable<ll> st(v);
+        int q;
+        cin >> q;
 
-    while(q--){
-        int a, b;
-        cin >> a >> b;
-        a--; b--;
-        cout << st.query(a, b) << endl;
+        while (q--) {
+            int l, k;
+            cin >> l >> k;
+            l--;
+
+            int le = l, ri = n - 1;
+            int ans = -1;
+
+            while (le <= ri) {
+                int m = le + (ri - le) / 2;
+                if (st.query(l, m) >= k) {
+                    ans = m + 1;
+                    le = m + 1;
+                } else {
+                    ri = m - 1;
+                }
+            }
+
+            cout << ans << " ";
+        }
+        cout << endl;
     }
 
     return 0;

@@ -17,24 +17,28 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 const int MOD = 1e9 + 7;
 
-vector<ll> apples;
 
-ll div(int n, ll a, ll b){
-    if(n == 0){
-        return abs(a-b);
+void mv(int A, int B){
+    cout << A << " " << B << endl;
+}
+
+void hanoi(int n, int A = 1, int C = 3, int B = 2){
+    if(n == 1){
+        mv(A, C);
+    }else{
+        hanoi(n-1, A, B, C);
+        mv(A, C);
+        hanoi(n-1, B, C, A);
     }
-    return min(div(n-1, a + apples[n-1], b), div(n-1, a, b + apples[n-1]));
 }
 
 int main() { _
 
-    int n;
-    cin >> n;
-    apples.resize(n);
+    int t;
+    cin >> t;
 
-    for(int i = 0; i < n; i++){
-        cin >> apples[i];
-    }
-    cout << div(n, 0, 0) << endl;
+    cout << (1<<t) - 1 << endl;
+    hanoi(t);
+
     return 0;
 }
