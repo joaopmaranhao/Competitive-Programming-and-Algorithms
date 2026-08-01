@@ -18,12 +18,12 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 const int MOD = 1e9 + 7;
 
 vector<int> stones;
-vector<int> memo;
+vector<int> dp;
 
 int frog(int i, int n) {
     if (i == n - 1) return 0;
 
-    if (memo[i] != -1) return memo[i];
+    if (dp[i] != -1) return dp[i];
 
     int op1 = frog(i + 1, n) + abs(stones[i] - stones[i + 1]);
 
@@ -32,25 +32,25 @@ int frog(int i, int n) {
         op2 = frog(i + 2, n) + abs(stones[i] - stones[i + 2]);
     }
 
-    return memo[i] = min(op1, op2);
+    return dp[i] = min(op1, op2);
 }
 
 int frogit(int i, int n){
     
-    memo.assign(3, 0);
+    dp.assign(3, 0);
 
-    memo[0] = 0;
+    dp[0] = 0;
     if(n > 1){
-        memo[1] = abs(stones[1] - stones[0]);
+        dp[1] = abs(stones[1] - stones[0]);
     }
 
     for(int i = 2; i < n; i++){
-        memo[i%3] = min(
-                memo[(i-1)%3] + abs(stones[i] - stones[i-1]), 
-                memo[(i-2)%3] + abs(stones[i] - stones[i-2])
+        dp[i%3] = min(
+                dp[(i-1)%3] + abs(stones[i] - stones[i-1]), 
+                dp[(i-2)%3] + abs(stones[i] - stones[i-2])
             );
     }
-    return memo[(n-1)%3];
+    return dp[(n-1)%3];
 }
 
 int main() { _

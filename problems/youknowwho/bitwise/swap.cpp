@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+using namespace std;
+
+using ll = long long;
+using ull = unsigned long long;
+
+#define pb push_back
+#define F first
+#define S second
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define endl '\n'
+
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+const int MOD = 1e9 + 7;
+
+int main() { _
+
+    int t;
+    cin >> t;
+
+    while (t--) {
+        ll n;
+        cin >> n;
+        bitset<64> b(n);
+        for(int i = 1; i <= 64; i++){
+            if(i%2 == 1){
+                bool t = b[i];
+                b[i] = b[i-1];
+                b[i-1] = t;
+            }
+        }
+        cout << b.to_ullong() << endl;
+    }
+
+    return 0;
+}
