@@ -19,24 +19,30 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    int n;
-    cin >> n;
+    int q;
+    cin >> q;
 
-    vector<int> v(n);
-    for(int i = 0; i < n; i++) {
-        cin >> v[i];      
-    }
+    vector<int> v;
 
-    map<int, int> m;
-    for(int e : v){
-        m[e]++;
-    }
+    while(q--) {
 
-    int ans = 0;
-    for(auto& [n , f] : m){
-        if(f-n < 0) ans += f;
-        else ans += f-n;
+        int qt;
+        cin >> qt;
+
+        if(qt == 0){
+            int x;
+            cin >> x;
+            v.pb(x);
+
+        }else if(qt == 1){
+            int p;
+            cin >> p;
+            cout << v[p] << endl;
+
+        }else if(qt == 2){
+            v.pop_back();
+            
+        }
     }
-    cout << ans << endl;
     return 0;
 }

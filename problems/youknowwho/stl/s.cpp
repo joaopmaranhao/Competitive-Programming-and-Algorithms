@@ -27,16 +27,12 @@ int main() { _
         cin >> v[i];      
     }
 
-    map<int, int> m;
-    for(int e : v){
-        m[e]++;
-    }
+    sort(all(v));
 
-    int ans = 0;
-    for(auto& [n , f] : m){
-        if(f-n < 0) ans += f;
-        else ans += f-n;
+    for(int e : v){
+        cout << e << " ";
     }
-    cout << ans << endl;
+    cout << endl;
+
     return 0;
 }

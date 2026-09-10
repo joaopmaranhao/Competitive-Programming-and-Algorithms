@@ -22,21 +22,16 @@ int main() { _
     int n;
     cin >> n;
 
-    vector<int> v(n);
-    for(int i = 0; i < n; i++) {
-        cin >> v[i];      
+    map<string, int> m;
+
+    while(n--){
+        string s;
+        cin >> s;
+
+        if(m[s] == 0) cout << "OK" << endl;
+        else cout << s + to_string(m[s]) << endl;
+        m[s]++;
     }
 
-    map<int, int> m;
-    for(int e : v){
-        m[e]++;
-    }
-
-    int ans = 0;
-    for(auto& [n , f] : m){
-        if(f-n < 0) ans += f;
-        else ans += f-n;
-    }
-    cout << ans << endl;
     return 0;
 }

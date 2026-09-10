@@ -22,21 +22,15 @@ int main() { _
     int n;
     cin >> n;
 
-    vector<int> v(n);
-    for(int i = 0; i < n; i++) {
-        cin >> v[i];      
+    map<int, int> m[3];
+    
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < n - i; j++){
+            int s;
+            cin >> s;
+            m[i][s]++;
+        }
     }
 
-    map<int, int> m;
-    for(int e : v){
-        m[e]++;
-    }
-
-    int ans = 0;
-    for(auto& [n , f] : m){
-        if(f-n < 0) ans += f;
-        else ans += f-n;
-    }
-    cout << ans << endl;
     return 0;
 }

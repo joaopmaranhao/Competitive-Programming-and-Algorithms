@@ -1,43 +1,39 @@
 #include <bits/stdc++.h>
-#define _ ios_base::sync_with_stdio(0);cin.tie(0);
-#define endl '\n'
-#define pb push_back
-#define all(x) (x).begin(), (x).end()
 
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
 using namespace std;
 
 using ll = long long;
-using llu = unsigned long long;
+using ull = unsigned long long;
+
+#define pb push_back
+#define F first
+#define S second
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define endl '\n'
 
 const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+const int MOD = 1e9 + 7;
 
-int main(){
+int main() { _
 
-        int n;
-        string s;
+    int n;
+    string s;
+   
+    cin >> n;
+    cin >> s;
 
-        cin >> n;
-        cin >> s;
-
-        map<char, int> char_counts;
-
-        for(int i = 0; i < n; i++){
-                char_counts[s[i]]++;
-        }
-
-        int ones = char_counts['n'];
-        int zeros = char_counts['z'];
-
-        for(int i = 0; i < ones; i++){
-                cout << "1 ";
-        }
-
-        for(int i = 0; i < zeros; i++){
-                cout << "0 ";
-        }
-
-        cout << endl;
-
-        return 0;
+    int ones = 0, zeros = 0;
+    for(auto c : s){
+        if(c == 'n') ones++;
+        if(c == 'z') zeros++;
+    }
+    for(int i = 0; i < ones + zeros; i++){
+        (i < ones) ? cout << 1 : cout << 0; cout << " ";
+    }
+    
+    cout << endl;
+    return 0;
 }

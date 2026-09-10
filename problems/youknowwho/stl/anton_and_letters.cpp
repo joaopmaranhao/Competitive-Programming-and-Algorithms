@@ -19,24 +19,16 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    int n;
-    cin >> n;
+    string s;
+    getline(cin, s);
 
-    vector<int> v(n);
-    for(int i = 0; i < n; i++) {
-        cin >> v[i];      
+    set<char> st;
+    for(auto c : s){
+        if(c == '{' || c == '}' || c == ',' || c == ' ') continue;
+        st.insert(c);
     }
-
-    map<int, int> m;
-    for(int e : v){
-        m[e]++;
-    }
-
-    int ans = 0;
-    for(auto& [n , f] : m){
-        if(f-n < 0) ans += f;
-        else ans += f-n;
-    }
+    int ans = st.size();
     cout << ans << endl;
+
     return 0;
 }
