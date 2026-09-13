@@ -21,19 +21,28 @@ int main() { _
 
     string s;
     cin >> s;
-    stack<char> stk;
 
-    int ans = 0;
-
-    for(char c : s){
-        if(c == '('){
-            stk.push('(');
-        }else if(!stk.empty() && c == ')' && stk.top() == '('){
-            stk.pop();
-            ans += 2;
-        }
+    vector<int> v;
+    for(auto c : s){
+        if(c == 'a') v.pb(1);
+        else v.pb(0);
     }
-    cout << ans << endl;
-    return 0;
+
+    vector<int> p(s.size()+1);
+
+    p[0] = 0;
+    for(int i = 1; i <= s.size(); i++) {
+        p[i] = p[i-1] + v[i-1];
+    }
     
+    int q;
+    cin >> q;
+
+    while(q--){
+        int l, r;
+        cin >> l >> r;
+        cout << p[r] - p[l-1] << endl;
+    }
+
+    return 0;
 }

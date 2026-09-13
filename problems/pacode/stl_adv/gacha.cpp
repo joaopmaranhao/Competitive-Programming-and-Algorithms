@@ -13,20 +13,18 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
- 
-        int n;
-        set<string> items;
+    
+    int n;
+    cin >> n;
 
-        cin >> n;
-
-        for(int i = 0; i < n; i++) {
-                string temp;
-                cin >> temp;
-                
-                items.insert(temp);
-        }
-
-        cout << items.size() << endl;
+    set<string> st;
+    for(int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
         
-        return 0;
+        st.insert(s);
+    }
+
+    cout << st.size() << endl;
+    return 0;
 }

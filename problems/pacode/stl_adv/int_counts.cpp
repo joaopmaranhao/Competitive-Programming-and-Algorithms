@@ -14,20 +14,19 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 
 int main(){ _
  
-        int temp;
-        map<int,int> freq;
-        vector<int> ord;
+    int temp;
+    map<int,int> freq;
+    vector<int> ord;
 
-        while(cin >> temp){
-                if(freq[temp] == 0){
-                        ord.pb(temp);
-                }
-                freq[temp]++;
+    while(cin >> temp){
+        if(freq[temp] == 0){
+            ord.pb(temp);
         }
+        freq[temp]++;
+    }
 
-        for(auto num : ord){
-                cout << num << " " << freq[num] << endl;
-        }
-
-        return 0;
+    for(auto num : ord){
+        cout << num << " " << freq[num] << endl;
+    }
+    return 0;
 }

@@ -19,21 +19,12 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    string s;
-    cin >> s;
-    stack<char> stk;
+    string s, t;
+    cin >> s >> t;
 
-    int ans = 0;
-
-    for(char c : s){
-        if(c == '('){
-            stk.push('(');
-        }else if(!stk.empty() && c == ')' && stk.top() == '('){
-            stk.pop();
-            ans += 2;
-        }
+    for(int i = 0; i < 8; i++){
+        cout << ((s[i] - '0') ^ (t[i] - '0'));
     }
-    cout << ans << endl;
+    cout << endl;
     return 0;
-    
 }

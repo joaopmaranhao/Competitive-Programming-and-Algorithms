@@ -26,20 +26,17 @@ int main() { _
         int n;
         cin >> n;
 
-        priority_queue<ll> pq;
-        ll ans = 0;
+        int o, z;
+        o = z = 0;
+        for(int i = 0; i < n; i++) {
+            int vi;
+            cin >> vi;
 
-        for(int i = 0; i < n; i++){
-            ll tmp;
-            cin >> tmp;
-            if(tmp > 0){
-                pq.push(tmp);
-            }else if(tmp == 0 && !pq.empty()){
-                ans += pq.top();
-                pq.pop();        
-            }
+            vi == 1 ? o++ : z++;
         }
-        cout << ans << endl;
+
+        o >= z ? cout << "Bessie" : cout << "Elsie";
+        cout << endl;
     }
 
     return 0;

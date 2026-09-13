@@ -19,27 +19,28 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-    int t;
-    cin >> t;
+    int n, m;
+    cin >> n >> m;
 
-    while (t--) {
-        int n;
-        cin >> n;
+    multiset<int> t;
+    for(int i = 0; i < n; i++) {
+        int ti;
+        cin >> ti;
+        t.insert(ti);
+    }
 
-        priority_queue<ll> pq;
-        ll ans = 0;
+    for(int i = 0; i < m; i++) {
+        int ci;
+        cin >> ci;
 
-        for(int i = 0; i < n; i++){
-            ll tmp;
-            cin >> tmp;
-            if(tmp > 0){
-                pq.push(tmp);
-            }else if(tmp == 0 && !pq.empty()){
-                ans += pq.top();
-                pq.pop();        
-            }
+        auto it = t.upper_bound(ci);
+        if(it != t.begin()){
+            --it;
+            cout << *it << endl;
+            t.erase(it);
+        }else{
+            cout << -1 << endl;
         }
-        cout << ans << endl;
     }
 
     return 0;

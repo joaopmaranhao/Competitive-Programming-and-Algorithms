@@ -22,24 +22,16 @@ int main() { _
     int t;
     cin >> t;
 
-    while (t--) {
+    while(t--){
         int n;
         cin >> n;
 
-        priority_queue<ll> pq;
-        ll ans = 0;
-
-        for(int i = 0; i < n; i++){
-            ll tmp;
-            cin >> tmp;
-            if(tmp > 0){
-                pq.push(tmp);
-            }else if(tmp == 0 && !pq.empty()){
-                ans += pq.top();
-                pq.pop();        
-            }
+        vector<int> a(n);
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];      
         }
-        cout << ans << endl;
+
+        
     }
 
     return 0;
