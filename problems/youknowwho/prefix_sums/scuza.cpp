@@ -23,22 +23,30 @@ int main() { _
     cin >> t;
 
     while (t--) {
+     
         int n, q;
         cin >> n >> q;
         vector<ll> a(n);
-        for(auto& ai : a) cin >> ai;
-
-        vector<ll> p(n+1, 0);
-        for(int i = 1; i <= n; i++){
-            p[i] = p[i-1] + a[i-1];
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];      
         }
+
+        ll c = 0;
+        vector<ll> mp(n);
+        vector<ll> p(n+1); p[0] = 0;
+        for(int i = 0; i < n; i++) {
+            p[i+1] = p[i] + a[i];
+            c = max(c, a[i]);
+            mp[i] = c;       
+        }
+
         while(q--){
-            int l, r, k;
-            cin >> l >> r >> k;
-
-            int s = p[n] - (p[r]-p[l-1]) + (ll)(r-l+1) * k;
-            cout << ((s & 1LL) ? "YES" : "NO") << endl;
+            ll k;
+            cin >> k;
+            int i = upper_bound(all(mp), k) - mp.begin();
+            cout << p[i] << " ";
         }
+        cout << endl;
     }
 
     return 0;

@@ -22,23 +22,24 @@ int main() { _
     int t;
     cin >> t;
 
-    while (t--) {
-        int n, q;
-        cin >> n >> q;
-        vector<ll> a(n);
-        for(auto& ai : a) cin >> ai;
-
-        vector<ll> p(n+1, 0);
-        for(int i = 1; i <= n; i++){
-            p[i] = p[i-1] + a[i-1];
+    while(t--){
+        int n;
+        cin >> n;
+        vector<ll> p(n+1);
+        for(int i = 1; i <= n; i++) {
+            cin >> p[i];      
         }
-        while(q--){
-            int l, r, k;
-            cin >> l >> r >> k;
 
-            int s = p[n] - (p[r]-p[l-1]) + (ll)(r-l+1) * k;
-            cout << ((s & 1LL) ? "YES" : "NO") << endl;
+        vector<int> pos, val;
+        for(int i = 1; i <= n; i++) {
+            if(p[i] != i){
+                pos.pb(i);
+                val.pb(p[i]);
+            }
         }
+
+        reverse(all(val));
+        cout << (val == pos ? "YES" : "NO") << endl;
     }
 
     return 0;
