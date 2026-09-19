@@ -17,20 +17,17 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 const int MOD = 1e9 + 7;
 
+ll xor0(ll n){
+    ll ans[] = {n, 1, n+1, 0};
+    return ans[n%4];
+}
+
 int main() { _
 
-    int n;
-    cin >> n;
+    ll a, b;
+    cin >> a >> b;
 
-    while (n--) {
-        ll l, r;
-        cin >> l >> r;
-
-        for(ll i = l; i <= r; i++){
-            cout << __builtin_popcountll(i) << " ";
-        }
-        cout << endl;
-    }
-
+    a = (a == 0) ? 0 : xor0(a - 1);
+    cout << (xor0(b) ^ a) << endl;
     return 0;
 }
