@@ -19,29 +19,20 @@ const int MOD = 1e9 + 7;
 
 int main() { _
 
-
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
     vector<int> v(n);
-    for(int i = 0; i < n; i++){
-        cin >> v[i];
+    for(int i = 0; i < n; i++) {
+        cin >> v[i];      
     }
-    
-    priority_queue<int, vector<int>, greater<int>> mn;
-    priority_queue<int> mx;
-    for(int i = 0; i < n; i++){
-        mx.push(v[i]);
-        mn.push(mx.top());
-        mx.pop();
-
-        if((int)mn.size() > k) {
-            mx.push(mn.top());
-            mn.pop();
-        }
-
-        if(i + 1 >= k) {
-            cout << mn.top() << "\n";
-        }
+   
+    multiset<int> t;
+    t.insert(v[0]);
+    for(int i = 1; i < n; i++){
+        auto it = t.upper_bound(v[i]);
+        if(it != t.end() && *it > v[i]) t.erase(it);
+        t.insert(v[i]);
     }
+    cout << t.size() << endl;
     return 0;
 }
