@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+
+#define _ ios_base::sync_with_stdio(0);cin.tie(0);
+using namespace std;
+
+using ll = long long;
+using ull = unsigned long long;
+
+#define pb push_back
+#define F first
+#define S second
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define endl '\n'
+
+const int INF = 0x3f3f3f3f;
+const ll LINF = 0x3f3f3f3f3f3f3f3fll;
+const int MOD = 1e9 + 7;
+
+struct BIT{
+    int n;
+    vector<ll> bit;
+
+    BIT(int n) : n(n) {
+        bit.assign(n + 1, 0);
+    }
+
+    //this operation builds the bit by extracting the LSB (i & -i), from the
+    //index, the prefixation is done by default this way
+    BIT(const vector<ll>& v){
+
+        n = v.size();
+        bit.assign(n + 1, 0);
+        for(int i = 1; i <= n; i++) {
+            bit[i] += v[i - 1];
+            int j = i + (i & -i);
+            if(j <= n) { bit[j] += bit[i]; }       
+        }
+    }
+
+    // walks down the BIT and sums up the value, it happens in O(log n) time 
+    ll query(int i) {
+        ll ret = 0;
+        for(++i; i > 0; i -= i & -i) { ret += bit[i]; }
+        return ret;
+    }
+    ll query(int l, int r){
+        return query(r) - query(l - 1);
+    }
+    //allows update in O(log n) time
+    void update(int i, ll add){
+        for(++i; i <= n; i+= i & -i) { bit[i] += add; }
+    }
+
+    // acha o indice 0-indexed do k-esimo elemento "vivo" (k é 1-indexed)
+    int find_kth(ll k){
+        int pos = 0;
+        int logn = 1;
+        while((1<<logn) <= n) logn++;
+        ll remaining = k;
+        for(int pw = logn; pw >= 0; pw--){
+            int nxt = pos + (1<<pw);
+            if(nxt <= n && bit[nxt] < remaining){
+                pos = nxt;
+                remaining -= bit[nxt];
+            }
+        }
+        return pos;
+    }
+
+};
+
+int main() { _
+
+    int t;
+    cin >> t;
+
+    while (t--) {
+     
+        int n, k;
+        cin >> n >> k;
+        vector<ll> a(n);
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];      
+        }
+
+        vector<ll> ones(n, 1);
+        BIT bit(ones);
+
+        int m = n;
+        ll score = 0;
+        while(m >= k){
+            int posL = bit.find_kth(k);
+            int posR = bit.find_kth(m - k + 1);
+            if(a[posL] >= a[posR]){
+                score += a[posL];
+                bit.update(posL, -1);
+            } else {
+                score += a[posR];
+                bit.update(posR, -1);
+            }
+            m--;
+        }
+        cout << score << endl;      
+    }
+
+    return 0;
+}
