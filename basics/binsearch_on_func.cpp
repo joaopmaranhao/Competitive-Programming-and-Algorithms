@@ -4,7 +4,7 @@
 using namespace std;
 
 using ll = long long;
-using ull = unsigned long long
+using ull = unsigned long long;
 
 bool valid(ll m){
     //Validation function, it must be monotonic
