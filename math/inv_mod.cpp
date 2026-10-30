@@ -31,7 +31,6 @@ ll exgcd(ll a, ll b, ll &x, ll &y){
     return d;
 }
 
-
 ll inv(ll a, ll m){
     ll x, y;
     ll g = exgcd(a, m, x, y);

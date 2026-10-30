@@ -8,7 +8,6 @@ vector<ll> w, v;
 
 ll knapsack(int n, ll m) {
     vector<vector<ll>> dp(n+1, vector<ll>(m+1));
-
     for (int i = 1; i <= n; i++) {
         for (ll j = 0; j <= m; j++) {
             if(i == 0 || j == 0){
